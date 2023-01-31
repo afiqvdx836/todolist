@@ -23,9 +23,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::prefix('todolist')->group(function(){
+Route::prefix('todolist')->middleware(['auth'])->group(function(){
     Route::get('/view', [TodoController::class, 'View'])->name('all.todolist');
-
+    Route::get('/add', [TodoController::class, 'create'])->name('add.list');
+    Route::post('/store', [TodoController::class, 'store'])->name('store.list');
+    
 });
 
 
